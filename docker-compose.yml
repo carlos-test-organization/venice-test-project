@@ -1,0 +1,35 @@
+# docker-compose version, required
+version: '2'
+
+# Description of available services
+services:
+
+  # Builder, generates the project's artifact
+  builder:
+
+    # Docker instructions
+    build:
+      context: .
+      dockerfile: ./docker/builder.dockerfile
+
+    # Mirrors the current folder to the service's /workdir folder
+    volumes:
+      - .:/workdir
+
+  # Server, serves the generated project's artifact
+  server:
+
+    # Docker instructions
+    build:
+      context: .
+      dockerfile: ./docker/server.dockerfile
+
+    # Mirrors the current folder to the server's /dist folder
+    volumes:
+      - .:/dist
+
+    # Forwards server's 8080 port to local's 3000 port
+    # Note: port 3000 is the only allowed port, it will map to port 80 on the
+    # deployed service
+    ports:
+      - "3000:8080"

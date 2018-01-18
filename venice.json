@@ -1,0 +1,29 @@
+{
+  "description": {
+    "project": "venice-test-project",
+    "type": "smart"
+  },
+  "build": {
+    "steps": [
+      "builder"
+    ],
+    "artifacts": {
+      "path": "dist/"
+    },
+    "versioning": {
+      "type": "basic"
+    },
+    "branches": {
+      "master": {
+        "version": "1.0.0"
+      }
+    }
+  },
+  "deploy": {
+    "service": "server",
+    "environments": {
+      "cd": "auto",
+      "qa": "manual"
+    }
+  }
+}
